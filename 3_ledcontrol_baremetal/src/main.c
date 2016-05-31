@@ -1,0 +1,150 @@
+/* Copyright 2016, XXXXXX
+ * All rights reserved.
+ *
+ * This file is part of CIAA Firmware.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from this
+ *    software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ */
+
+/** \brief Blinking Bare Metal example source file
+ **
+ ** This is a mini example of the CIAA Firmware.
+ **
+ **/
+
+/** \addtogroup CIAA_Firmware CIAA Firmware
+ ** @{ */
+
+/** \addtogroup Examples CIAA Firmware Examples
+ ** @{ */
+/** \addtogroup Baremetal Bare Metal example source file
+ ** @{ */
+
+/*
+ * Initials     Name
+ * ---------------------------
+ *
+ */
+
+/*
+ * modification history (new versions first)
+ * -----------------------------------------------------------
+ * yyyymmdd v0.0.1 initials initial version
+ */
+
+/*==================[inclusions]=============================================*/
+#include "../inc/main.h"       /* <= own header */
+
+
+/*==================[macros and definitions]=================================*/
+#define TIMER_MS_MAX	250
+#define TIMER_MS_MIN	50
+
+/*==================[internal data declaration]==============================*/
+
+/*==================[internal functions declaration]=========================*/
+void ISR_RITHandler(void)
+{
+	static uint8_t led = LED_R;
+	static uint8_t timer_ms = TIMER_MS_MAX;
+
+	if(KeyPressed(KEY1) == false)
+	{
+		led--;
+		if(led < LED_R)
+			led = LED_R;
+
+		TurnOffLed(LED_R);
+		TurnOffLed(LED_Y);
+		TurnOffLed(LED_G);
+	}
+	if(KeyPressed(KEY2) == false)
+	{
+		led++;
+		if(led > LED_G)
+			led = LED_G;
+
+		TurnOffLed(LED_R);
+		TurnOffLed(LED_Y);
+		TurnOffLed(LED_G);
+	}
+	if(KeyPressed(KEY3) == false)
+	{
+		timer_ms--;
+		if(timer_ms < TIMER_MS_MIN)
+			timer_ms = TIMER_MS_MIN;
+	}
+	if(KeyPressed(KEY4) == false)
+	{
+		timer_ms++;
+		if(timer_ms > TIMER_MS_MAX)
+			timer_ms = TIMER_MS_MAX;
+	}
+	TimerSetInterval(timer_ms);
+
+	ToggleLed(led);
+	TimerClearFlag();
+}
+
+/*==================[internal data definition]===============================*/
+
+/*==================[external data definition]===============================*/
+
+/*==================[internal functions definition]==========================*/
+
+
+/*==================[external functions definition]==========================*/
+/** \brief Main function
+ *
+ * This is the main entry point of the software.
+ *
+ * \returns 0
+ *
+ * \remarks This function never returns. Return value is only to avoid compiler
+ *          warnings or errors.
+ */
+
+
+
+int main(void)
+{
+   /* perform the needed initialization here */
+	InitLed();
+	InitTimer(TIMER_MS_MAX);
+	InitKey();
+
+	while(1)
+	{
+	}
+}
+
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
+/** @} doxygen end group definition */
+/*==================[end of file]============================================*/
+
