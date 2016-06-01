@@ -31,8 +31,8 @@
  *
  */
 
-#ifndef TIMER_H
-#define TIME_H
+#ifndef KEY_H
+#define KEY_H
 /** \brief Bare Metal example header file
  **
  ** This is a mini example of the CIAA Firmware

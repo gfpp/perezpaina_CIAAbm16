@@ -81,7 +81,7 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-void InitTimer(uint8_t timer_ms)
+void InitTimer(uint32_t timer_ms)
 {
 	Chip_RIT_Init(LPC_RITIMER);
 	Chip_RIT_SetTimerInterval(LPC_RITIMER, timer_ms);
@@ -93,7 +93,7 @@ void TimerClearFlag(void)
 	Chip_RIT_ClearInt(LPC_RITIMER);
 }
 
-void TimerSetInterval(uint8_t timer_ms)
+void TimerSetInterval(uint32_t timer_ms)
 {
 	Chip_RIT_SetTimerInterval(LPC_RITIMER, timer_ms);
 }

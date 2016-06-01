@@ -32,7 +32,7 @@
  */
 
 #ifndef TIMER_H
-#define TIME_H
+#define TIMER_H
 /** \brief Bare Metal example header file
  **
  ** This is a mini example of the CIAA Firmware
@@ -68,9 +68,9 @@
 /*==================[typedef]================================================*/
 
 /*==================[external data declaration]==============================*/
-void InitTimer(uint8_t timer_ms);
+void InitTimer(uint32_t timer_ms);
+void TimerSetInterval(uint32_t timer_ms);
 void TimerClearFlag(void);
-void TimerSetInterval(uint8_t timer_ms);
 
 /*==================[external functions declaration]=========================*/
 
