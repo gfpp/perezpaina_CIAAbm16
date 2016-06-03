@@ -77,6 +77,7 @@ void InitUart(uint8_t uart_id, uint32_t baud);
 uint8_t ReadUartByte(uint8_t uart_id);
 void WriteUartByte(uint8_t uart_id, uint8_t byte);
 
+void SendUartFloatAscii(float val, uint8_t n_dec);
 
 /*==================[external functions declaration]=========================*/
 

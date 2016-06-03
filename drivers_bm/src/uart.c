@@ -109,11 +109,39 @@ uint8_t ReadUartByte(uint8_t uart_id)
 	{
 		return Chip_UART_ReadByte((LPC_USART_T*)LPC_USART2);
 	}
+	return 0;
 }
 
 void WriteUartByte(uint8_t uart_id, uint8_t byte)
 {
 	Chip_UART_SendByte((LPC_USART_T*)LPC_USART2, byte);
+}
+
+/* ToDo: Send more than one integer digit
+ *       and variable digits of decimal part
+ */
+void SendUartFloatAscii(float val, uint8_t n_dec)
+{
+	uint8_t digit, val_int, val_dec, num;
+
+	val_int = (uint8_t)val;
+	val = val - val_int;
+	val_dec = (uint8_t)(val*1000);
+
+	WriteUartByte(UART2, val_int + '0');		/* Integer part */
+	WriteUartByte(UART2, '.');					/* Decimal point */
+
+	num = val_dec / 100;
+	WriteUartByte(UART2, num + '0');
+	val_dec = val_dec - num*100;
+
+	num = val_dec / 10;
+	WriteUartByte(UART2, num + '0');
+	val_dec = val_dec - num*10;
+
+	WriteUartByte(UART2, val_dec + '0');
+
+	WriteUartByte(UART2, '\r');
 }
 
 /*==================[external functions definition]==========================*/
