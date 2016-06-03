@@ -119,9 +119,16 @@ void WriteUartByte(uint8_t uart_id, uint8_t byte)
 
 void WriteUartNBytes(uint8_t uart_id, uint8_t* data, uint32_t n)
 {
-	uint32_t i;
+	uint32_t i, j;
 	for(i = 0; i < n; i++)
 		WriteUartByte(uart_id, data[i]);
+//	while( ((Chip_UART_ReadLineStatus((LPC_USART_T *)LPC_USART2) & UART_LSR_THRE) != 0) && (i < n) )
+//	{
+//		Chip_UART_SendByte((LPC_USART_T*)LPC_USART2, data[i]);
+//		for(j = 0; j < 500000; j++)
+//			asm("nop");
+//		i++;
+//	}
 }
 
 /* ToDo: Send more than one integer digit
@@ -130,6 +137,12 @@ void WriteUartNBytes(uint8_t uart_id, uint8_t* data, uint32_t n)
 void SendUartFloatAscii(uint8_t uart_id, float val, uint8_t n_dec)
 {
 	uint32_t i, val_int, val_dec, num;
+
+	if(val < 0)
+	{
+		WriteUartByte(uart_id, '-');
+		val = -val;
+	}
 
 	val_int = (uint32_t)val;
 	WriteUartByte(uart_id, val_int + '0');		/* Integer part */
