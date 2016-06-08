@@ -96,7 +96,7 @@ void ISR_RITHandler(void)
 	}
 
 	LED_Toggle(led);
-	TimerClearFlag();
+	RIT_ClearFlag();
 }
 
 /*==================[internal data definition]===============================*/
@@ -125,7 +125,7 @@ int main(void)
 
    /* perform the needed initialization here */
 	LED_Init();
-	InitTimer(TIMER_MS_MIN);
+	RIT_Init(TIMER_MS_MIN);
 	InitKey();
 
 	while(1)
@@ -141,7 +141,7 @@ int main(void)
 			if(timer_ms < TIMER_MS_MIN)
 				timer_ms = TIMER_MS_MIN;
 
-			TimerSetInterval(timer_ms);
+			RIT_SetInterval(timer_ms);
 		}
 		if(KeyPressed(KEY4) == false)
 		{
@@ -154,7 +154,7 @@ int main(void)
 			if(timer_ms > TIMER_MS_MAX)
 				timer_ms = TIMER_MS_MAX;
 
-			TimerSetInterval(timer_ms);
+			RIT_SetInterval(timer_ms);
 		}
 	}
 }
