@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -71,10 +71,10 @@ void ISR_RITHandler(void)
 {
 	static uint8_t led = LED_RGB_R;
 
-	ToggleLed(led);
+	LED_Toggle(led);
 
-	led++;
-	if(led > LED_G)
+	//led++;
+	if(++led > LED_G)
 		led = LED_RGB_R;
 
 	TimerClearFlag();
@@ -103,7 +103,7 @@ void ISR_RITHandler(void)
 int main(void)
 {
    /* perform the needed initialization here */
-	InitLed();
+	LED_Init();
 	InitTimer(TIMER_MS);
 
 	while(1)

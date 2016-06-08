@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
