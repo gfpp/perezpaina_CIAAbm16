@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -88,10 +88,9 @@ void ISR_RITHandler(void)
 	static uint8_t key_ms = 0;
 
 	/* Led blinking */
-	led_ms--;
-	if(led_ms == 0)
+	if(--led_ms == 0)
 	{
-		ToggleLed(LED_G);
+		LED_Toggle(LED_G);
 		led_ms = LED_BLK_MS;
 	}
 	if(key_ms > 0)
@@ -102,7 +101,7 @@ void ISR_RITHandler(void)
 	{
 		dac_val_max += 10;
 		dac_inc = (float)dac_val_max / period;
-		ToggleLed(LED_R);
+		LED_Toggle(LED_R);
 		key_ms = KEY_MS;
 	}
 	/* KEY2: Decrease signal amplitude */
@@ -110,7 +109,7 @@ void ISR_RITHandler(void)
 	{
 		dac_val_max -= 10;
 		dac_inc = (float)dac_val_max / period;
-		ToggleLed(LED_Y);
+		LED_Toggle(LED_Y);
 		key_ms = KEY_MS;
 	}
 	/* KEY3: Increase signal period */
@@ -118,7 +117,7 @@ void ISR_RITHandler(void)
 	{
 		period++;
 		dac_inc = (float)dac_val_max / period;
-		ToggleLed(LED_R);
+		LED_Toggle(LED_R);
 		key_ms = KEY_MS;
 	}
 	/* KEY4: Decrease signal period */
@@ -126,7 +125,7 @@ void ISR_RITHandler(void)
 	{
 		period--;
 		dac_inc = (float)dac_val_max / period;
-		ToggleLed(LED_R);
+		LED_Toggle(LED_R);
 		key_ms = KEY_MS;
 	}
 
@@ -168,7 +167,7 @@ int main(void)
 	uint32_t i;
 
 	/* Initialize drivers */
-	InitLed();
+	LED_Init();
 	InitKey();
 	InitTimer(TIMER_MS_BASE);
 	InitDac(0);
