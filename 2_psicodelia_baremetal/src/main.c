@@ -77,7 +77,7 @@ void ISR_RITHandler(void)
 	if(++led > LED_G)
 		led = LED_RGB_R;
 
-	TimerClearFlag();
+	RIT_ClearFlag();
 }
 
 /*==================[internal data definition]===============================*/
@@ -104,7 +104,7 @@ int main(void)
 {
    /* perform the needed initialization here */
 	LED_Init();
-	InitTimer(TIMER_MS);
+	RIT_Init(TIMER_MS);
 
 	while(1)
 	{
