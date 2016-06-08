@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -132,7 +132,7 @@ void ISR_RITHandler(void)
 		WriteUartNBytes(UART2, off_str, OFF_STR_N);
 		SendUartFloatAscii(UART2, offset[offset_idx], 3);
 
-		ToggleLed(LED_G);
+		LED_Toggle(LED_G);
 		led_ms = LED_BLK_MS;
 	}
 
@@ -173,7 +173,7 @@ int main(void)
 	float volts;
 
 	/* Initialize drivers */
-	InitLed();
+	LED_Init();
 	InitKey();
 	InitDac(0);
 	InitAdc(ADC_CH1);
