@@ -144,7 +144,7 @@ void ISR_RITHandler(void)
 		adc_ms = ADC_MS;
 	}
 
-	TimerClearFlag();
+	RIT_ClearFlag();
 }
 
 /*==================[internal data definition]===============================*/
@@ -178,7 +178,7 @@ int main(void)
 	InitDac(0);
 	InitAdc(ADC_CH1);
 	InitUart(UART2, 115200);
-	InitTimer(TIMER_MS_BASE);
+	RIT_Init(TIMER_MS_BASE);
 
 	while(1)
 	{
