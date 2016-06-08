@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -62,52 +62,40 @@
 
 
 /*==================[macros and definitions]=================================*/
-#define TIMER_MS_MAX	250
-#define TIMER_MS_MIN	50
+#define TIMER_MS_MAX	1000
+#define TIMER_MS_MIN	200
+#define TIMER_MS_STEP	10
 
 /*==================[internal data declaration]==============================*/
+
 
 /*==================[internal functions declaration]=========================*/
 void ISR_RITHandler(void)
 {
 	static uint8_t led = LED_R;
-	static uint8_t timer_ms = TIMER_MS_MAX;
 
 	if(KeyPressed(KEY1) == false)
 	{
-		led--;
-		if(led < LED_R)
+		if(--led < LED_R)
 			led = LED_R;
 
-		TurnOffLed(LED_R);
-		TurnOffLed(LED_Y);
-		TurnOffLed(LED_G);
+		LED_TurnOff(LED_R);
+		LED_TurnOff(LED_Y);
+		LED_TurnOff(LED_G);
+		//LED_TurnOffAll();
 	}
 	if(KeyPressed(KEY2) == false)
 	{
-		led++;
-		if(led > LED_G)
+		if(++led > LED_G)
 			led = LED_G;
 
-		TurnOffLed(LED_R);
-		TurnOffLed(LED_Y);
-		TurnOffLed(LED_G);
+		LED_TurnOff(LED_R);
+		LED_TurnOff(LED_Y);
+		LED_TurnOff(LED_G);
+		//LED_TurnOffAll();
 	}
-	if(KeyPressed(KEY3) == false)
-	{
-		timer_ms--;
-		if(timer_ms < TIMER_MS_MIN)
-			timer_ms = TIMER_MS_MIN;
-	}
-	if(KeyPressed(KEY4) == false)
-	{
-		timer_ms++;
-		if(timer_ms > TIMER_MS_MAX)
-			timer_ms = TIMER_MS_MAX;
-	}
-	TimerSetInterval(timer_ms);
 
-	ToggleLed(led);
+	LED_Toggle(led);
 	TimerClearFlag();
 }
 
@@ -133,13 +121,41 @@ void ISR_RITHandler(void)
 
 int main(void)
 {
+	uint32_t i, timer_ms = TIMER_MS_MIN;
+
    /* perform the needed initialization here */
-	InitLed();
-	InitTimer(TIMER_MS_MAX);
+	LED_Init();
+	InitTimer(TIMER_MS_MIN);
 	InitKey();
 
 	while(1)
 	{
+		if(KeyPressed(KEY3) == false)
+		{
+			while(KeyPressed(KEY3) == false);
+			LED_TurnOn(LED_RGB_B);
+			for(i = 1000000; i != 0; i--);
+			LED_TurnOff(LED_RGB_B);
+
+			timer_ms -= TIMER_MS_STEP;
+			if(timer_ms < TIMER_MS_MIN)
+				timer_ms = TIMER_MS_MIN;
+
+			TimerSetInterval(timer_ms);
+		}
+		if(KeyPressed(KEY4) == false)
+		{
+			while(KeyPressed(KEY4) == false);
+			LED_TurnOn(LED_RGB_B);
+			for(i = 1000000; i != 0; i--);
+			LED_TurnOff(LED_RGB_B);
+
+			timer_ms += TIMER_MS_STEP;
+			if(timer_ms > TIMER_MS_MAX)
+				timer_ms = TIMER_MS_MAX;
+
+			TimerSetInterval(timer_ms);
+		}
 	}
 }
 
