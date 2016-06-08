@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -58,7 +58,7 @@
  */
 
 /*==================[inclusions]=============================================*/
-#include "blk_bm.h"       /* <= own header */
+#include "../inc/main.h"       /* <= own header */
 
 
 /*==================[macros and definitions]=================================*/
@@ -73,13 +73,6 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-void BlinkingLed(uint8_t led)
-{
-	uint32_t i;
-
-	ToggleLed(LED_RGB_G);
-	for(i = N_LOOP_DELAY; i != 0; i--);
-}
 
 /*==================[external functions definition]==========================*/
 /** \brief Main function
@@ -99,20 +92,21 @@ int main(void)
 	uint32_t i;
 
    /* perform the needed initialization here */
-	InitLed();
+	LED_Init();
 
 	while(1)
 	{
-		//ToggleLed(LED_RGB_G);
-		TurnOnLed(LED_RGB_B);
-		TurnOnLed(LED_R);
-		TurnOffLed(LED_Y);
-		TurnOffLed(LED_G);
+		//LED_Toggle(LED_RGB_G);
+
+		LED_TurnOn(LED_RGB_B);
+		LED_TurnOn(LED_R);
+		LED_TurnOff(LED_Y);
+		LED_TurnOff(LED_G);
 		for(i = N_LOOP_DELAY; i != 0; i--);
-		TurnOffLed(LED_RGB_B);
-		TurnOffLed(LED_R);
-		TurnOnLed(LED_Y);
-		TurnOnLed(LED_G);
+		LED_TurnOff(LED_RGB_B);
+		LED_TurnOff(LED_R);
+		LED_TurnOn(LED_Y);
+		LED_TurnOn(LED_G);
 		for(i = N_LOOP_DELAY; i != 0; i--);
 	}
 }

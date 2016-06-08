@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -31,8 +31,8 @@
  *
  */
 
-#ifndef BLK_BM_H
-#define BLK_BM_H
+#ifndef MAIN_H
+#define MAIN_H
 /** \brief Bare Metal example header file
  **
  ** This is a mini example of the CIAA Firmware
@@ -103,7 +103,6 @@ void RIT_IRQHandler(void);
 #endif
 
 /*==================[external functions declaration]=========================*/
-void BlinkingLed(uint8_t led);
 
 
 /** @} doxygen end group definition */
