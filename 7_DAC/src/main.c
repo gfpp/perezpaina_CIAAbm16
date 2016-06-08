@@ -139,7 +139,7 @@ void ISR_RITHandler(void)
 		dac_val = 0;
 	}
 	SetDac(dac_val);
-	TimerClearFlag();
+	RIT_ClearFlag();
 }
 
 /*==================[internal data definition]===============================*/
@@ -168,8 +168,8 @@ int main(void)
 
 	/* Initialize drivers */
 	LED_Init();
+	RIT_Init(TIMER_MS_BASE);
 	InitKey();
-	InitTimer(TIMER_MS_BASE);
 	InitDac(0);
 
 	while(1)
