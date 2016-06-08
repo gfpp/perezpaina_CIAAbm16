@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -64,7 +64,6 @@
 /*==================[macros and definitions]=================================*/
 
 /*==================[internal data declaration]==============================*/
-
 
 /*==================[internal functions declaration]=========================*/
 

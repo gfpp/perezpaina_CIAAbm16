@@ -15,21 +15,21 @@ void ISR_RITHandler(void)
 
 	if(r_cnt != 0) r_cnt--;
 	if(r_cnt == 0)
-		TurnOffLed(LED_RGB_R);
+		LED_TurnOff(LED_RGB_R);
 	else
-		TurnOnLed(LED_RGB_R);
+		LED_TurnOn(LED_RGB_R);
 
 	if(g_cnt != 0) g_cnt--;
 	if(g_cnt == 0)
-		TurnOffLed(LED_RGB_G);
+		LED_TurnOff(LED_RGB_G);
 	else
-		TurnOnLed(LED_RGB_G);
+		LED_TurnOn(LED_RGB_G);
 
 	if(b_cnt != 0) b_cnt--;
 	if(b_cnt == 0)
-		TurnOffLed(LED_RGB_B);
+		LED_TurnOff(LED_RGB_B);
 	else
-		TurnOnLed(LED_RGB_B);
+		LED_TurnOn(LED_RGB_B);
 
 	TimerClearFlag();
 }
@@ -109,13 +109,13 @@ void LedColorInit(void)
 	color[15].b = 20;
 
 	/* Initialize drivers */
-	InitLed();
+	LED_Init();
 	InitTimer(COLOR_TIMER_BASE);
 
 	/* Turn off RGB led */
-	TurnOffLed(LED_RGB_R);
-	TurnOffLed(LED_RGB_G);
-	TurnOffLed(LED_RGB_B);
+	LED_TurnOff(LED_RGB_R);
+	LED_TurnOff(LED_RGB_G);
+	LED_TurnOff(LED_RGB_B);
 }
 
 void LedColorSet(uint8_t color_idx)
