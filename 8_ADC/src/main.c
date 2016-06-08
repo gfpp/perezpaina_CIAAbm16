@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -81,19 +81,17 @@ void ISR_RITHandler(void)
 	static uint8_t adc_ms = ADC_MS;
 
 	/* Led blinking */
-	led_ms--;
-	if(led_ms == 0)
+	if(--led_ms == 0)
 	{
-		ToggleLed(LED_Y);
+		LED_Toggle(LED_Y);
 		led_ms = LED_BLK_MS;
 	}
 
 	/* ADC */
-	adc_ms--;
-	if(adc_ms == 0)
+	if(--adc_ms == 0)
 	{
 		AdcStartNow();
-		ToggleLed(LED_RGB_B);
+		LED_Toggle(LED_RGB_B);
 		adc_ms = ADC_MS;
 	}
 
@@ -127,7 +125,7 @@ int main(void)
 	uint32_t low_thr = 200;
 
 	/* Initialize drivers */
-	InitLed();
+	LED_Init();
 	InitKey();
 	InitAdc(ADC_CH1);
 	InitDac(val);
@@ -164,14 +162,14 @@ int main(void)
 		}
 
 		if(val > high_thr)
-			TurnOnLed(LED_R);
+			LED_TurnOn(LED_R);
 		else
-			TurnOffLed(LED_R);
+			LED_TurnOff(LED_R);
 
 		if(val < low_thr)
-			TurnOnLed(LED_G);
+			LED_TurnOn(LED_G);
 		else
-			TurnOffLed(LED_G);
+			LED_TurnOff(LED_G);
 	}
 }
 
