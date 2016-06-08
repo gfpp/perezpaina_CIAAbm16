@@ -68,9 +68,11 @@
 /*==================[typedef]================================================*/
 
 /*==================[external data declaration]==============================*/
-void InitTimer(uint32_t timer_ms);
-void TimerSetInterval(uint32_t timer_ms);
-void TimerClearFlag(void);
+void RIT_Init(uint32_t timer_ms);
+void RIT_ClearFlag(void);
+void RIT_SetInterval(uint32_t timer_ms);
+void RIT_Enable(void);
+void RIT_Disable(void);
 
 /*==================[external functions declaration]=========================*/
 

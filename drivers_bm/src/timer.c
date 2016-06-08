@@ -81,22 +81,33 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-void InitTimer(uint32_t timer_ms)
+void RIT_Init(uint32_t timer_ms)
 {
 	Chip_RIT_Init(LPC_RITIMER);
 	Chip_RIT_SetTimerInterval(LPC_RITIMER, timer_ms);
 	NVIC_EnableIRQ(RITIMER_IRQn);
 }
 
-void TimerClearFlag(void)
+void RIT_ClearFlag(void)
 {
 	Chip_RIT_ClearInt(LPC_RITIMER);
 }
 
-void TimerSetInterval(uint32_t timer_ms)
+void RIT_SetInterval(uint32_t timer_ms)
 {
 	Chip_RIT_SetTimerInterval(LPC_RITIMER, timer_ms);
 }
+
+void RIT_Enable(void)
+{
+	/* ToDo */
+}
+
+void RIT_Disable(void)
+{
+	/* ToDo */
+}
+
 /*==================[external functions definition]==========================*/
 /** \brief Main function
  *
