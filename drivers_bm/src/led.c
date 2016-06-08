@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXX  
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -71,7 +71,7 @@
 
 
 /*==================[macros and definitions]=================================*/
-#define PIN_PACKAGE_LEDS	2
+#define PIN_LEDS_PKG		2
 
 #define PIN_LED0_R			0
 #define PIN_LED0_G			1
@@ -101,16 +101,16 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-void InitLed(void)
+void LED_Init(void)
 {
 	Chip_GPIO_Init(LPC_GPIO_PORT);
-	Chip_SCU_PinMux(PIN_PACKAGE_LEDS, PIN_LED0_R, MD_PUP, FUNC4);	// Mapping P2_0 to GPIO5[0]
-	Chip_SCU_PinMux(PIN_PACKAGE_LEDS, PIN_LED0_G, MD_PUP, FUNC4);	// Mapping P2_1 to GPIO5[1]
-	Chip_SCU_PinMux(PIN_PACKAGE_LEDS, PIN_LED0_B, MD_PUP, FUNC4);	// Mapping P2_2 to GPIO5[2]
+	Chip_SCU_PinMux(PIN_LEDS_PKG, PIN_LED0_R, MD_PUP, FUNC4);	// Mapping P2_0 to GPIO5[0]
+	Chip_SCU_PinMux(PIN_LEDS_PKG, PIN_LED0_G, MD_PUP, FUNC4);	// Mapping P2_1 to GPIO5[1]
+	Chip_SCU_PinMux(PIN_LEDS_PKG, PIN_LED0_B, MD_PUP, FUNC4);	// Mapping P2_2 to GPIO5[2]
 
-	Chip_SCU_PinMux(PIN_PACKAGE_LEDS, PIN_LED1, MD_PUP, FUNC0);		// Mapping P2_10 to GPIO0[14]
-	Chip_SCU_PinMux(PIN_PACKAGE_LEDS, PIN_LED2, MD_PUP, FUNC0);		// Mapping P2_11 to GPIO1[11]
-	Chip_SCU_PinMux(PIN_PACKAGE_LEDS, PIN_LED3, MD_PUP, FUNC0);		// Mapping P2_12 to GPI01[12]
+	Chip_SCU_PinMux(PIN_LEDS_PKG, PIN_LED1, MD_PUP, FUNC0);		// Mapping P2_10 to GPIO0[14]
+	Chip_SCU_PinMux(PIN_LEDS_PKG, PIN_LED2, MD_PUP, FUNC0);		// Mapping P2_11 to GPIO1[11]
+	Chip_SCU_PinMux(PIN_LEDS_PKG, PIN_LED3, MD_PUP, FUNC0);		// Mapping P2_12 to GPI01[12]
 
 	/* GPIO5 LEDs pins to OUTPUT */
 	Chip_GPIO_SetDir(LPC_GPIO_PORT, GPIO5, GPIO5_LED_MASK, GPIO_OUTPUT);
@@ -128,7 +128,7 @@ void InitLed(void)
 	Chip_GPIO_SetPinOutLow(LPC_GPIO_PORT, GPIO1, PIN_LED3);
 }
 
-void TurnOnLed(uint8_t led)
+void LED_TurnOn(uint8_t led)
 {
 	switch(led)
 	{
@@ -153,7 +153,7 @@ void TurnOnLed(uint8_t led)
 	}
 }
 
-void TurnOffLed(uint8_t led)
+void LED_TurnOff(uint8_t led)
 {
 	switch(led)
 	{
@@ -178,7 +178,7 @@ void TurnOffLed(uint8_t led)
 	}
 }
 
-void ToggleLed(uint8_t led)
+void LED_Toggle(uint8_t led)
 {
 	switch(led)
 	{
@@ -203,6 +203,15 @@ void ToggleLed(uint8_t led)
 	}
 }
 
+void LED_TurnOnAll(void)
+{
+	/* ToDo */
+}
+
+void LED_TurnOffAll(void)
+{
+	/* ToDo */
+}
 
 /*==================[external functions definition]==========================*/
 /** \brief Main function

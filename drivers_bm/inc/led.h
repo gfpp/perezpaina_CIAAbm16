@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -78,10 +78,13 @@
 
 
 /*==================[external functions declaration]=========================*/
-void InitLed(void);
-void TurnOnLed(uint8_t led);
-void TurnOffLed(uint8_t led);
-void ToggleLed(uint8_t led);
+void LED_Init(void);
+void LED_TurnOn(uint8_t led);
+void LED_TurnOff(uint8_t led);
+void LED_Toggle(uint8_t led);
+void LED_TurnOnAll(void);
+void LED_TurnOffAll(void);
+
 
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */
