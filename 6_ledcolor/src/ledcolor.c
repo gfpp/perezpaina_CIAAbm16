@@ -31,7 +31,7 @@ void ISR_RITHandler(void)
 	else
 		LED_TurnOn(LED_RGB_B);
 
-	TimerClearFlag();
+	RIT_ClearFlag();
 }
 
 void LedColorInit(void)
@@ -110,7 +110,7 @@ void LedColorInit(void)
 
 	/* Initialize drivers */
 	LED_Init();
-	InitTimer(COLOR_TIMER_BASE);
+	RIT_Init(COLOR_TIMER_BASE);
 
 	/* Turn off RGB led */
 	LED_TurnOff(LED_RGB_R);
