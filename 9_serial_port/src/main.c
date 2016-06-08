@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -66,7 +66,7 @@
 #define LED_BLK_MS		100
 #define ADC_MS			10
 #define ADC_MAX			1023
-#define VOLTS_MAX		3.3
+#define VOLTS_MAX		3.3f
 
 /*==================[internal data declaration]==============================*/
 
@@ -78,16 +78,14 @@ void ISR_RITHandler(void)
 	static uint8_t adc_ms = ADC_MS;
 
 	/* Led blinking */
-	led_ms--;
-	if(led_ms == 0)
+	if(--led_ms == 0)
 	{
-		ToggleLed(LED_RGB_B);
+		LED_Toggle(LED_RGB_B);
 		led_ms = LED_BLK_MS;
 	}
 
 	/* ADC */
-	adc_ms--;
-	if(adc_ms == 0)
+	if(--adc_ms == 0)
 	{
 		AdcStartNow();
 		adc_ms = ADC_MS;
@@ -123,7 +121,7 @@ int main(void)
 	float volts;
 
 	/* Initialize drivers */
-	InitLed();
+	LED_Init();
 	InitKey();
 	InitAdc(ADC_CH1);
 	InitUart(UART2, 115200);
@@ -138,15 +136,15 @@ int main(void)
 		{
 			case 'r':
 			case 'R':
-				ToggleLed(LED_R);
+				LED_Toggle(LED_R);
 				break;
 			case 'a':
 			case 'A':
-				ToggleLed(LED_Y);
+				LED_Toggle(LED_Y);
 				break;
 			case 'v':
 			case 'V':
-				ToggleLed(LED_G);
+				LED_Toggle(LED_G);
 				break;
 		}
 
@@ -159,7 +157,7 @@ int main(void)
 		volts_dec = (uint8_t)(volts*1000);
 
 		WriteUartByte(UART2, volts_int + '0');		/* Integer part */
-		WriteUartByte(UART2, '.');		/* Decimal point */
+		WriteUartByte(UART2, '.');					/* Decimal point */
 
 		num = volts_dec / 100;
 		WriteUartByte(UART2, num + '0');
