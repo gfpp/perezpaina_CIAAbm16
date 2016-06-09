@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -73,11 +73,11 @@
 /*==================[typedef]================================================*/
 
 /*==================[external data declaration]==============================*/
-void InitUart(uint8_t uart_id, uint32_t baud);
-uint8_t ReadUartByte(uint8_t uart_id);
-void WriteUartByte(uint8_t uart_id, uint8_t byte);
-void WriteUartNBytes(uint8_t uart_id, uint8_t* data, uint32_t n);
-void SendUartFloatAscii(uint8_t uart_id, float val, uint8_t n_dec);
+void UART_Init(uint8_t uart_id, uint32_t baud);
+uint8_t UART_ReadByte(uint8_t uart_id);
+void UART_WriteByte(uint8_t uart_id, uint8_t byte);
+void UART_WriteNBytes(uint8_t uart_id, uint8_t* data, uint32_t n);
+void UART_SendFloatAscii(uint8_t uart_id, float val, uint8_t n_dec);
 
 
 /*==================[external functions declaration]=========================*/

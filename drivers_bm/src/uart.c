@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXX  
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -86,7 +86,7 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-void InitUart(uint8_t uart_id, uint32_t baud)
+void UART_Init(uint8_t uart_id, uint32_t baud)
 {
 	if(uart_id == UART2)
 	{
@@ -103,7 +103,7 @@ void InitUart(uint8_t uart_id, uint32_t baud)
 	}
 }
 
-uint8_t ReadUartByte(uint8_t uart_id)
+uint8_t UART_ReadByte(uint8_t uart_id)
 {
 	if(uart_id == UART2)
 	{
@@ -112,16 +112,16 @@ uint8_t ReadUartByte(uint8_t uart_id)
 	return 0;
 }
 
-void WriteUartByte(uint8_t uart_id, uint8_t byte)
+void UART_WriteByte(uint8_t uart_id, uint8_t byte)
 {
 	Chip_UART_SendByte((LPC_USART_T*)LPC_USART2, byte);
 }
 
-void WriteUartNBytes(uint8_t uart_id, uint8_t* data, uint32_t n)
+void UART_WriteNBytes(uint8_t uart_id, uint8_t* data, uint32_t n)
 {
 	uint32_t i, j;
 	for(i = 0; i < n; i++)
-		WriteUartByte(uart_id, data[i]);
+		UART_WriteByte(uart_id, data[i]);
 //	while( ((Chip_UART_ReadLineStatus((LPC_USART_T *)LPC_USART2) & UART_LSR_THRE) != 0) && (i < n) )
 //	{
 //		Chip_UART_SendByte((LPC_USART_T*)LPC_USART2, data[i]);
@@ -131,22 +131,20 @@ void WriteUartNBytes(uint8_t uart_id, uint8_t* data, uint32_t n)
 //	}
 }
 
-/* ToDo: Send more than one integer digit
- *       and variable digits of decimal part
- */
-void SendUartFloatAscii(uint8_t uart_id, float val, uint8_t n_dec)
+/* ToDo: Send more than one integer digit */
+void UART_SendFloatAscii(uint8_t uart_id, float val, uint8_t n_dec)
 {
 	uint32_t i, val_int, val_dec, num;
 
 	if(val < 0)
 	{
-		WriteUartByte(uart_id, '-');
+		UART_WriteByte(uart_id, '-');
 		val = -val;
 	}
 
 	val_int = (uint32_t)val;
-	WriteUartByte(uart_id, val_int + '0');		/* Integer part */
-	WriteUartByte(uart_id, '.');				/* Decimal point */
+	UART_WriteByte(uart_id, val_int + '0');		/* Integer part */
+	UART_WriteByte(uart_id, '.');				/* Decimal point */
 
 	/* Send digital part digits */
 	for(i = n_dec; i != 0; i--)
@@ -154,9 +152,9 @@ void SendUartFloatAscii(uint8_t uart_id, float val, uint8_t n_dec)
 		val = val - val_int;
 		val *= 10.0;
 		val_int = (uint32_t)val;
-		WriteUartByte(uart_id, val_int + '0');
+		UART_WriteByte(uart_id, val_int + '0');
 	}
-	WriteUartByte(uart_id, '\r');
+	UART_WriteByte(uart_id, '\r');
 }
 
 /*==================[external functions definition]==========================*/
