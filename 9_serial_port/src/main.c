@@ -122,7 +122,6 @@ int main(void)
 
 	/* Initialize drivers */
 	LED_Init();
-	InitKey();
 	InitAdc(ADC_CH1);
 	InitUart(UART2, 115200);
 	RIT_Init(TIMER_MS_BASE);

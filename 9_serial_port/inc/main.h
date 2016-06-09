@@ -62,7 +62,6 @@
 #include "stdint.h"
 #include "led.h"
 #include "timer.h"
-#include "key.h"
 #include "adc.h"
 #include "uart.h"
 
