@@ -123,13 +123,13 @@ int main(void)
 	/* Initialize drivers */
 	LED_Init();
 	ADC_Init(ADC_CH1);
-	InitUart(UART2, 115200);
+	UART_Init(UART2, 115200);
 	RIT_Init(TIMER_MS_BASE);
 
 	while(1)
 	{
 		/* Reading UART2 */
-		byte = ReadUartByte(UART2);
+		byte = UART_ReadByte(UART2);
 
 		switch(byte)
 		{
@@ -151,24 +151,7 @@ int main(void)
 		adc_val = ADC_ReadPooling(ADC_CH1);
 
 		volts = VOLTS_MAX*adc_val / ADC_MAX;
-		volts_int = (uint8_t)volts;
-		volts = volts - volts_int;
-		volts_dec = (uint8_t)(volts*1000);
-
-		WriteUartByte(UART2, volts_int + '0');		/* Integer part */
-		WriteUartByte(UART2, '.');					/* Decimal point */
-
-		num = volts_dec / 100;
-		WriteUartByte(UART2, num + '0');
-		volts_dec = volts_dec - num*100;
-
-		num = volts_dec / 10;
-		WriteUartByte(UART2, num + '0');
-		volts_dec = volts_dec - num*10;
-
-		WriteUartByte(UART2, volts_dec + '0');
-
-		WriteUartByte(UART2, '\r');
+		UART_SendFloatAscii(UART2, volts, 3);
 	}
 }
 
