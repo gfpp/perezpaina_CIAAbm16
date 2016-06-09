@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXX  
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -84,7 +84,7 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-void InitAdc(uint8_t channel)
+void ADC_Init(uint8_t channel)
 {
 	ADC_CLOCK_SETUP_T ADCSetup;
 
@@ -95,12 +95,12 @@ void InitAdc(uint8_t channel)
 	Chip_ADC_SetSampleRate(LPC_ADC0, &ADCSetup, ADC_MAX_SAMPLE_RATE);
 }
 
-void AdcStartNow(void)
+void ADC_StartNow(void)
 {
 	Chip_ADC_SetStartMode(LPC_ADC0, ADC_START_NOW, ADC_TRIGGERMODE_RISING);
 }
 
-uint16_t ReadAdcPooling(uint8_t channel)
+uint16_t ADC_ReadPooling(uint8_t channel)
 {
 	uint16_t value;
 

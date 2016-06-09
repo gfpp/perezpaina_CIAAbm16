@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -71,9 +71,9 @@
 /*==================[typedef]================================================*/
 
 /*==================[external data declaration]==============================*/
-void InitAdc(uint8_t channel);
-void AdcStartNow(void);
-uint16_t ReadAdcPooling(uint8_t channel);
+void ADC_Init(uint8_t channel);
+void ADC_StartNow(void);
+uint16_t ADC_ReadPooling(uint8_t channel);
 
 
 
