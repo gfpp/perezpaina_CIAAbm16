@@ -126,7 +126,7 @@ int main(void)
 
 	/* Initialize drivers */
 	LED_Init();
-	InitKey();
+	KEY_Init();
 	InitAdc(ADC_CH1);
 	InitDac(val);
 	RIT_Init(TIMER_MS_BASE);
@@ -137,27 +137,27 @@ int main(void)
 		SetDac(val);
 
 		/* KEY1: Increase HIGH threshold */
-		if( (KeyPressed(KEY1) == false) && (high_thr < HIGH_THR_MAX) )
+		if( (KEY_IsPressed(KEY1) == true) && (high_thr < HIGH_THR_MAX) )
 		{
-			while(KeyPressed(KEY1) ==  false) {}
+			while(KEY_IsPressed(KEY1) ==  true) {}
 			high_thr += THR_STEP;
 		}
 		/* KEY2: Increase HIGH threshold */
-		if( (KeyPressed(KEY2) == false) && (high_thr > HIGH_THR_MIN) )
+		if( (KEY_IsPressed(KEY2) == true) && (high_thr > HIGH_THR_MIN) )
 		{
-			while(KeyPressed(KEY1) ==  false) {}
+			while(KEY_IsPressed(KEY1) ==  true) {}
 			high_thr -= THR_STEP;
 		}
 		/* KEY3: Increase LOW threshold */
-		if( (KeyPressed(KEY3) == false) && (low_thr < LOW_THR_MAX) )
+		if( (KEY_IsPressed(KEY3) == true) && (low_thr < LOW_THR_MAX) )
 		{
-			while(KeyPressed(KEY3) ==  false) {}
+			while(KEY_IsPressed(KEY3) ==  true) {}
 			low_thr += THR_STEP;
 		}
 		/* KEY4: Increase LOW threshold */
-		if( (KeyPressed(KEY4) == false) && (low_thr > LOW_THR_MIN) )
+		if( (KEY_IsPressed(KEY4) == true) && (low_thr > LOW_THR_MIN) )
 		{
-			while(KeyPressed(KEY4) ==  false) {}
+			while(KEY_IsPressed(KEY4) ==  true) {}
 			low_thr -= THR_STEP;
 		}
 
