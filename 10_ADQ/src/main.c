@@ -174,7 +174,7 @@ int main(void)
 
 	/* Initialize drivers */
 	LED_Init();
-	InitKey();
+	KEY_Init();
 	InitDac(0);
 	InitAdc(ADC_CH1);
 	InitUart(UART2, 115200);
@@ -183,27 +183,27 @@ int main(void)
 	while(1)
 	{
 		/* KEY1: Increase GAIN (decrease index) */
-		if( (KeyPressed(KEY1) == false) && (gain_idx != 0) )
+		if( (KEY_IsPressed(KEY1) == true) && (gain_idx != 0) )
 		{
-			while(KeyPressed(KEY1) ==  false) {}
+			while(KEY_IsPressed(KEY1) ==  true) {}
 			gain_idx--;
 		}
 		/* KEY2: Decrease GAIN (increase index) */
-		if( (KeyPressed(KEY2) == false) && (gain_idx < N_GAIN-1) )
+		if( (KEY_IsPressed(KEY2) == true) && (gain_idx < N_GAIN-1) )
 		{
-			while(KeyPressed(KEY2) ==  false) {}
+			while(KEY_IsPressed(KEY2) ==  true) {}
 			gain_idx++;
 		}
 		/* KEY3: Increase OFFSET (decrease index) */
-		if( (KeyPressed(KEY3) == false) && (offset_idx != 0) )
+		if( (KEY_IsPressed(KEY3) == true) && (offset_idx != 0) )
 		{
-			while(KeyPressed(KEY3) ==  false) {}
+			while(KEY_IsPressed(KEY3) ==  true) {}
 			offset_idx--;
 		}
 		/* KEY4: Decrease OFFSET (increase index) */
-		if( (KeyPressed(KEY4) == false) && (offset_idx < N_OFFSET-1) )
+		if( (KEY_IsPressed(KEY4) == true) && (offset_idx < N_OFFSET-1) )
 		{
-			while(KeyPressed(KEY4) ==  false) {}
+			while(KEY_IsPressed(KEY4) ==  true) {}
 			offset_idx++;
 		}
 
