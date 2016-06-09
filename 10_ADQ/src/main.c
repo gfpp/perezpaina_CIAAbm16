@@ -140,7 +140,7 @@ void ISR_RITHandler(void)
 	adc_ms--;
 	if(adc_ms == 0)
 	{
-		AdcStartNow();
+		ADC_StartNow();
 		adc_ms = ADC_MS;
 	}
 
@@ -176,7 +176,7 @@ int main(void)
 	LED_Init();
 	KEY_Init();
 	DAC_Init(0);
-	InitAdc(ADC_CH1);
+	ADC_Init(ADC_CH1);
 	InitUart(UART2, 115200);
 	RIT_Init(TIMER_MS_BASE);
 
@@ -210,7 +210,7 @@ int main(void)
 		/* Reading A/D Converter, and process signal */
 		signal_max = 0.0;
 		signal_min = SIGNAL_MIN;
-		adc_val = ReadAdcPooling(ADC_CH1);
+		adc_val = ADC_ReadPooling(ADC_CH1);
 		if(adc_val != adc_val_prev)
 		{
 			volts = VOLTS_MAX*(float)adc_val / ADC_MAX;
