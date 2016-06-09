@@ -115,7 +115,7 @@ void ISR_RITHandler(void)
 		else
 			dac_val = DAC_HIGH_VAL;
 
-		SetDac(dac_val);
+		DAC_SetValue(dac_val);
 		dac_ms = DAC_MS;
 	}
 
@@ -175,7 +175,7 @@ int main(void)
 	/* Initialize drivers */
 	LED_Init();
 	KEY_Init();
-	InitDac(0);
+	DAC_Init(0);
 	InitAdc(ADC_CH1);
 	InitUart(UART2, 115200);
 	RIT_Init(TIMER_MS_BASE);
