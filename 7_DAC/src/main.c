@@ -138,7 +138,7 @@ void ISR_RITHandler(void)
 		n_period = period;
 		dac_val = 0;
 	}
-	SetDac(dac_val);
+	DAC_SetValue(dac_val);
 	RIT_ClearFlag();
 }
 
@@ -170,7 +170,7 @@ int main(void)
 	LED_Init();
 	RIT_Init(TIMER_MS_BASE);
 	KEY_Init();
-	InitDac(0);
+	DAC_Init(0);
 
 	while(1)
 	{
