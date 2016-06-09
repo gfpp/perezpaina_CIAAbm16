@@ -90,7 +90,7 @@ void ISR_RITHandler(void)
 	/* ADC */
 	if(--adc_ms == 0)
 	{
-		AdcStartNow();
+		ADC_StartNow();
 		LED_Toggle(LED_RGB_B);
 		adc_ms = ADC_MS;
 	}
@@ -127,13 +127,13 @@ int main(void)
 	/* Initialize drivers */
 	LED_Init();
 	KEY_Init();
-	InitAdc(ADC_CH1);
+	ADC_Init(ADC_CH1);
 	DAC_Init(val);
 	RIT_Init(TIMER_MS_BASE);
 
 	while(1)
 	{
-		val = ReadAdcPooling(ADC_CH1);
+		val = ADC_ReadPooling(ADC_CH1);
 		DAC_SetValue(val);
 
 		/* KEY1: Increase HIGH threshold */
