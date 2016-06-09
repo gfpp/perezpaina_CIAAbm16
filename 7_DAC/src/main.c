@@ -97,7 +97,7 @@ void ISR_RITHandler(void)
 		key_ms--;
 
 	/* KEY1: Increase signal amplitude */
-	if( (KeyPressed(KEY1) == false) && (dac_val_max < DAC_VAL_MAX) && (key_ms == 0) )
+	if( (KEY_IsPressed(KEY1) == true) && (dac_val_max < DAC_VAL_MAX) && (key_ms == 0) )
 	{
 		dac_val_max += 10;
 		dac_inc = (float)dac_val_max / period;
@@ -105,7 +105,7 @@ void ISR_RITHandler(void)
 		key_ms = KEY_MS;
 	}
 	/* KEY2: Decrease signal amplitude */
-	if( (KeyPressed(KEY2) == false) && (dac_val_max > DAC_VAL_MIN) && (key_ms == 0) )
+	if( (KEY_IsPressed(KEY2) == true) && (dac_val_max > DAC_VAL_MIN) && (key_ms == 0) )
 	{
 		dac_val_max -= 10;
 		dac_inc = (float)dac_val_max / period;
@@ -113,7 +113,7 @@ void ISR_RITHandler(void)
 		key_ms = KEY_MS;
 	}
 	/* KEY3: Increase signal period */
-	if( (KeyPressed(KEY3) == false) && (period < PERIOD_MAX) && (key_ms == 0) )
+	if( (KEY_IsPressed(KEY3) == true) && (period < PERIOD_MAX) && (key_ms == 0) )
 	{
 		period++;
 		dac_inc = (float)dac_val_max / period;
@@ -121,7 +121,7 @@ void ISR_RITHandler(void)
 		key_ms = KEY_MS;
 	}
 	/* KEY4: Decrease signal period */
-	if( (KeyPressed(KEY4) == false) && (period > PERIOD_MIN) && (key_ms == 0) )
+	if( (KEY_IsPressed(KEY4) == true) && (period > PERIOD_MIN) && (key_ms == 0) )
 	{
 		period--;
 		dac_inc = (float)dac_val_max / period;
@@ -169,7 +169,7 @@ int main(void)
 	/* Initialize drivers */
 	LED_Init();
 	RIT_Init(TIMER_MS_BASE);
-	InitKey();
+	KEY_Init();
 	InitDac(0);
 
 	while(1)
