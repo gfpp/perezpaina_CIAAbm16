@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -70,8 +70,8 @@
 /*==================[typedef]================================================*/
 
 /*==================[external data declaration]==============================*/
-void InitDac(uint32_t dac_val);
-void SetDac(uint32_t dac_val);
+void DAC_Init(uint32_t dac_val);
+void DAC_SetValue(uint32_t dac_val);
 
 
 /*==================[external functions declaration]=========================*/
