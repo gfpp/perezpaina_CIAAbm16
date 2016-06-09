@@ -128,13 +128,13 @@ int main(void)
 	LED_Init();
 	KEY_Init();
 	InitAdc(ADC_CH1);
-	InitDac(val);
+	DAC_Init(val);
 	RIT_Init(TIMER_MS_BASE);
 
 	while(1)
 	{
 		val = ReadAdcPooling(ADC_CH1);
-		SetDac(val);
+		DAC_SetValue(val);
 
 		/* KEY1: Increase HIGH threshold */
 		if( (KEY_IsPressed(KEY1) == true) && (high_thr < HIGH_THR_MAX) )
