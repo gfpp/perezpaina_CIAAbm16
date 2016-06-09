@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXXX
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -74,8 +74,8 @@
 /*==================[typedef]================================================*/
 
 /*==================[external data declaration]==============================*/
-void InitKey(void);
-bool KeyPressed(uint8_t key);
+void KEY_Init(void);
+bool KEY_IsPressed(uint8_t key);
 
 
 /*==================[external functions declaration]=========================*/

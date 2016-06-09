@@ -1,4 +1,4 @@
-/* Copyright 2016, XXXXXXXXX  
+/* Copyright 2016, Gonzalo Perez Paina
  * All rights reserved.
  *
  * This file is part of CIAA Firmware.
@@ -71,7 +71,7 @@
 
 
 /*==================[macros and definitions]=================================*/
-#define PIN_PACKAGE_KEYS	1
+#define PIN_KEYS_PKG		1
 
 #define PIN_KEY1			0
 #define PIN_KEY2			1
@@ -103,14 +103,14 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-void InitKey(void)
+void KEY_Init(void)
 {
 	Chip_GPIO_Init(LPC_GPIO_PORT);
 
-	Chip_SCU_PinMux(PIN_PACKAGE_KEYS, PIN_KEY1, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_0 to GPIO0[4], SW1
-	Chip_SCU_PinMux(PIN_PACKAGE_KEYS, PIN_KEY2, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_1 to GPIO0[8], SW2
-	Chip_SCU_PinMux(PIN_PACKAGE_KEYS, PIN_KEY3, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_2 to GPIO0[9], SW3
-	Chip_SCU_PinMux(PIN_PACKAGE_KEYS, PIN_KEY4, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_6 to GPIO1[9], SW4
+	Chip_SCU_PinMux(PIN_KEYS_PKG, PIN_KEY1, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_0 to GPIO0[4], SW1
+	Chip_SCU_PinMux(PIN_KEYS_PKG, PIN_KEY2, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_1 to GPIO0[8], SW2
+	Chip_SCU_PinMux(PIN_KEYS_PKG, PIN_KEY3, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_2 to GPIO0[9], SW3
+	Chip_SCU_PinMux(PIN_KEYS_PKG, PIN_KEY4, MD_PUP|MD_EZI|MD_ZI, FUNC0);// Mapping P1_6 to GPIO1[9], SW4
 
 	/* GPIO0 KEYs pins to INPUT */
 	Chip_GPIO_SetDir(LPC_GPIO_PORT, GPIO0, GPIO0_KEY_MASK, GPIO_INPUT);
@@ -118,7 +118,7 @@ void InitKey(void)
 	Chip_GPIO_SetDir(LPC_GPIO_PORT, GPIO1, GPIO1_KEY_MASK, GPIO_INPUT);
 }
 
-bool KeyPressed(uint8_t key)
+bool KEY_IsPressed(uint8_t key)
 {
 	bool press;
 
@@ -139,7 +139,7 @@ bool KeyPressed(uint8_t key)
 		press = Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, GPIO1, KEY4_PORT_NUM);
 	}
 
-	return press;
+	return !press;
 }
 
 /*==================[external functions definition]==========================*/
