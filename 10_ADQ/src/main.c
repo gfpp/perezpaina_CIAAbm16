@@ -123,14 +123,14 @@ void ISR_RITHandler(void)
 	led_ms--;
 	if(led_ms == 0)
 	{
-		WriteUartNBytes(UART2, max_str, MAX_STR_N);
-		SendUartFloatAscii(UART2, signal_max, 3);
-		WriteUartNBytes(UART2, min_str, MIN_STR_N);
-		SendUartFloatAscii(UART2, signal_min, 3);
-		WriteUartNBytes(UART2, gain_str, GAIN_STR_N);
-		SendUartFloatAscii(UART2, gain[gain_idx], 3);
-		WriteUartNBytes(UART2, off_str, OFF_STR_N);
-		SendUartFloatAscii(UART2, offset[offset_idx], 3);
+		UART_WriteNBytes(UART2, max_str, MAX_STR_N);
+		UART_SendFloatAscii(UART2, signal_max, 3);
+		UART_WriteNBytes(UART2, min_str, MIN_STR_N);
+		UART_SendFloatAscii(UART2, signal_min, 3);
+		UART_WriteNBytes(UART2, gain_str, GAIN_STR_N);
+		UART_SendFloatAscii(UART2, gain[gain_idx], 3);
+		UART_WriteNBytes(UART2, off_str, OFF_STR_N);
+		UART_SendFloatAscii(UART2, offset[offset_idx], 3);
 
 		LED_Toggle(LED_G);
 		led_ms = LED_BLK_MS;
@@ -177,7 +177,7 @@ int main(void)
 	KEY_Init();
 	DAC_Init(0);
 	ADC_Init(ADC_CH1);
-	InitUart(UART2, 115200);
+	UART_Init(UART2, 115200);
 	RIT_Init(TIMER_MS_BASE);
 
 	while(1)
