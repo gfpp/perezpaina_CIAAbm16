@@ -93,15 +93,15 @@ int main(void)
 	uint8_t color = 0;
 
 	LedColorInit();
-	InitKey();
+	KEY_Init();
 
 	LedColorSet(color);
 
 	while(1)
 	{
-		if(KeyPressed(KEY1) == false)
+		if(KEY_IsPressed(KEY1) == true)
 		{
-			while(KeyPressed(KEY1) == false);
+			while(KEY_IsPressed(KEY1) == true);
 
 			color++;
 			if(color >= LED_COLOR_N)
