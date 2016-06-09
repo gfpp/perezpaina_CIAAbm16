@@ -74,7 +74,7 @@ void ISR_RITHandler(void)
 {
 	static uint8_t led = LED_R;
 
-	if(KeyPressed(KEY1) == false)
+	if(KEY_IsPressed(KEY1) == true)
 	{
 		if(--led < LED_R)
 			led = LED_R;
@@ -84,7 +84,7 @@ void ISR_RITHandler(void)
 		LED_TurnOff(LED_G);
 		//LED_TurnOffAll();
 	}
-	if(KeyPressed(KEY2) == false)
+	if(KEY_IsPressed(KEY2) == true)
 	{
 		if(++led > LED_G)
 			led = LED_G;
@@ -126,13 +126,13 @@ int main(void)
    /* perform the needed initialization here */
 	LED_Init();
 	RIT_Init(TIMER_MS_MIN);
-	InitKey();
+	KEY_Init();
 
 	while(1)
 	{
-		if(KeyPressed(KEY3) == false)
+		if(KEY_IsPressed(KEY3) == true)
 		{
-			while(KeyPressed(KEY3) == false);
+			while(KEY_IsPressed(KEY3) == true);
 			LED_TurnOn(LED_RGB_B);
 			for(i = 1000000; i != 0; i--);
 			LED_TurnOff(LED_RGB_B);
@@ -143,9 +143,9 @@ int main(void)
 
 			RIT_SetInterval(timer_ms);
 		}
-		if(KeyPressed(KEY4) == false)
+		if(KEY_IsPressed(KEY4) == true)
 		{
-			while(KeyPressed(KEY4) == false);
+			while(KEY_IsPressed(KEY4) == true);
 			LED_TurnOn(LED_RGB_B);
 			for(i = 1000000; i != 0; i--);
 			LED_TurnOff(LED_RGB_B);
